@@ -1,5 +1,3 @@
-Here is the complete `README.md` file in **Markdown format**, ready to copy and use in your GitHub repository:  
-
 
 # SMCET  
 
