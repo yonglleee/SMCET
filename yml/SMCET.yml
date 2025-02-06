@@ -1,0 +1,67 @@
+#
+# @Author: liyong
+# @Description: file content
+#
+
+name: Net
+algorithm: SMCET #[LAG, HyperTF, DARN, MUCNN, GPPNN, SRPPNNN, PANNet, MSDCNN, PNN]
+type: MGCT
+nEpochs: 3000
+gpu_mode: True
+save_best: True
+gpus: [0]
+threads: 2
+
+seed: 123
+checkpoint: checkpoint
+data_name: 1IKONOS
+data_dir_train: ../data/1IKONOS/train
+data_dir_eval: ../data/1IKONOS/test
+source_ms: ms
+source_pan: pan
+
+resume:
+pretrain:
+  pretrained: False
+  pre_sr: SMCET/latest.pth
+  pre_folder: checkpoint
+
+test:
+  algorithm: SMCET #[SRPPNN, PANNet, MSDCNN, PNN]
+  type: test #[test, eval]
+  data_dir: ../data/1IKONOS/test
+  source_ms: ms
+  source_pan: pan
+  model: .pth
+data:
+  upsacle:  4
+  batch_size: 4
+  valbatch_size: 4
+  patch_size: 32
+  data_augmentation: False
+  n_colors: 4
+  rgb_range: 255
+  normalize: False
+  downgrade: Bic #[Bic or MTF]
+  source_mtf: mtf
+
+schedule:
+  name: CosineAnnealingRestartCyclicLR
+  periods: [ 2200, 5000 ]
+  restart_weights: [ 1,1 ]
+  eta_mins: [ 0.0003,0.000001 ]
+  lr: !!float 3e-4
+  decay: '4000'
+  gamma: 0.5
+  optimizer: ADAMW #[ADAM, SGD, RMSprop]
+  momentum: 0.9 #SGD momentum
+  beta1: 0.9 #ADAM beta
+  beta2: 0.999 #ADAM beta
+  epsilon: 1e-8 #ADAM epsilon
+  alpha: 0.9 #RMSprop alpha
+  weight_dency: !!float 1e-4
+  gclip: 0.04
+  loss: L1 #[MSE, L1]
+  auxi_lambda: 0.6 #auxi_mode*fft +(1-auxi_mode)*loss
+
+
