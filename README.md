@@ -1,7 +1,7 @@
 
 # Pan-Sharpening via Symmetric Multi-Scale Correction-Enhancement Transformers 
 
-Code for [SMCET](https://doi.org/10.1016/j.neunet.2025.107226)  
+Official repository for [SMCET](https://doi.org/10.1016/j.neunet.2025.107226)  
 
 ![Method Architecture](pic/method.jpg)  
 
